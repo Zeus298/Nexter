@@ -1,0 +1,71 @@
+// COLOR VARIABLES
+$color-primary: #c69963;
+$color-primary-dark: #B28451;
+
+$color-secondary: #101d2c;
+
+$color-grey-light-1: #f9f7f6;
+$color-grey-light-2: #aaa;
+
+$color-grey-dark-1: #54483A;
+$color-grey-dark-2: #6D5D4B; 
+
+//Dùng em để responsive trang -> 1em = 16px; bp = break point
+$bp-largest: 75em; // 1200px; 
+$bp-large: 62.5em; // 1000px; 
+$bp-medium: 50em; // 800px; 
+$bp-small: 37.5em; //600px
+
+// FONT VARIABLES
+$font-primary: 'Nunito', sans-serif;
+$font-display: 'Josefin Sans', sans-serif; 
+
+*, *::after, *::before {
+    margin: 0; 
+    padding: 0; 
+    box-sizing: inherit; 
+
+} 
+
+html {
+    box-sizing: border-box;
+    font-size: 62.5%; 
+
+    
+    @media only screen and (max-width: $bp-largest) {
+        font-size: 50%; // 1rem = ( 62.5 / 50 * 10 ) = 8px
+    }
+}
+
+body {
+    font-family: $font-primary; 
+    color: $color-grey-dark-2; 
+    font-weight: 300; 
+    line-height: 1.6;
+} 
+
+.container { 
+    //Dùng grid-line để đặt vị trí grid-cell --> Nếu có thay đổi media-query không phải viết lại toàn bộ code do mất hàng hoặc cột (Số ban đầu sẽ sai)
+    display: grid; 
+    grid-template-rows: 80vh min-content 40vw repeat(3, min-content);  
+    grid-template-columns: [sidebar-start] 8rem [sidebar-end full-start] minmax(6rem, 1fr) [center-start] repeat( 8, [col-start] minmax(min-content, 14rem) [col-end] ) [center-end] minmax(6rem, 1fr) [full-end];
+    
+    //Max-width = 1000px thì phần side-bar sẽ nằm ngang -> Xóa columns + Tạo rows
+    @media only screen and (max-width: $bp-large) {
+
+        grid-template-rows: 6rem 80vh min-content 40vw repeat(3, min-content);  
+        grid-template-columns:  [full-start] minmax(6rem, 1fr) [center-start] repeat( 8, [col-start] minmax(min-content, 14rem) [col-end] ) [center-end] minmax(6rem, 1fr) [full-end];
+        
+    } 
+
+    @media only screen and (max-width: $bp-medium) {
+        //grid-template-rows: 6rem calc(100vh - 6rem) min-content min-content min-content repeat(3, min-content);   
+        grid-template-rows: 6rem calc(100vh - 6rem);  
+    }
+
+    & > * { 
+        //Testing
+        // padding: 4rem; 
+        // font-size: 3rem;
+    }
+}
